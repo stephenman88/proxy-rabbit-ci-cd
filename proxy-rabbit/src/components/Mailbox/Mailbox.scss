@@ -1,0 +1,76 @@
+@use '../../styles/partials/global' as *;
+
+.mail{
+    display: flex;
+    overflow: hidden;
+    @include tablet{
+        @include page-boundaries;
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    &-unlogged{
+        width: 100%;
+        padding-top: 3rem;
+        
+        @include tablet{
+            @include page-boundaries;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &-outer{
+            background-color: $color-black;
+            padding: 0.1rem;
+            width: fit-content;
+
+            &-container{
+                border: 0.1rem solid $color-white;
+                padding: 2rem;
+                color: white;
+                
+                &__text{
+                    @include subheader-text;
+                }
+            }
+        }
+    }
+
+    &-chatlist-container{
+        width: 100%;
+        display:flex;
+        align-items: stretch;
+        flex: 1 0 auto;
+        @include tablet{
+            width: 25%;
+            position: static;
+            margin-left: 2rem;
+        }
+
+        @include desktop{
+            margin-left: 10%;
+        }
+    }
+
+    &-chatbox-container{
+        width: 100%;
+        display:flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        flex: 1 0 auto;
+        @include tablet{
+            width: 75%;
+            position: static;
+            margin-right: 2rem;
+        }
+
+        @include desktop{
+            margin-right: 10%;
+        }
+    }
+}

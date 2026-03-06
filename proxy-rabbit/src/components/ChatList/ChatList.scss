@@ -1,0 +1,19 @@
+@use '../../styles/partials/global' as *;
+
+.chatlist{
+    width: 100%;
+    padding: 0.2rem;
+    height: 100%;
+
+    @include tablet{
+        background-color: $color-black;
+    }
+
+    &-container{
+        width: 100%;
+        height: 100%;
+        @include tablet{
+            border: 0.1rem solid $color-white;
+        }
+    }
+}

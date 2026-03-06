@@ -1,0 +1,36 @@
+services:
+  web:
+    depends_on:
+    - api
+    image: proxy-rabbit-web-dev:1.0.0
+    container_name: proxy-rabbit-web-dev
+    build:
+      context: ./proxy-rabbit
+      dockerfile: Dockerfile.dev
+    develop:
+      watch:
+        - path: ./proxy-rabbit/package.json
+          action: rebuild
+        - path: ./proxy-rabbit/package-lock.json
+          action: rebuild
+        - path: ./proxy-rabbit
+          target: /app
+          action: sync
+      
+  api:
+    depends_on:
+    - db
+    image: proxy-rabbit-api-dev:1.0.0
+    container_name: proxy-rabbit-api
+    build:
+      context: ./proxy-rabbit-api
+      dockerfile: Dockerfile.dev
+    develop:
+      watch:
+        - path: ./proxy-rabbit-api/package.json
+          action: rebuild
+        - path: ./proxy-rabbit-api/package-lock.json
+          action: rebuild
+        - path: ./proxy-rabbit-api
+          target: /app
+          action: sync

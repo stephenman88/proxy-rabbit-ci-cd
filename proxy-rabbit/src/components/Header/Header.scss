@@ -1,0 +1,111 @@
+@use '../../styles/partials/global' as *;
+
+.top{
+    width: 100%;
+    
+}
+
+.header{
+    width: 100%;
+    @include page-boundaries;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+
+    @include tablet{
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    &__logo{
+        max-width: 35%;
+
+        @include tablet{
+            width: 20%;
+        }
+    }
+
+    &-content{
+        display:flex;
+        flex-grow: 1;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 3%;
+        
+        @include tablet{
+            gap: 5%;
+        }
+
+        &__mail{
+            padding-top: 0.4rem;
+        }
+
+        &__greeting{
+            @include body-text;
+        }
+
+        &__text--clickable{
+            @include body-text;
+            padding: 0.25rem 0.75rem 0.25rem;
+            border-radius: 1rem;
+            background-color: inherit;
+            border:none;
+            &:hover{
+                background-color: $color-dark-gray;
+            }
+
+            @include tablet{
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    }
+}
+
+.nav-bar{
+    background-color: $color-black;
+    color: $color-white;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 0.1rem solid $color-black;
+    border-bottom: 0.1rem solid $color-black;
+
+    &__line{
+        border-top: 0.075rem solid $color-white;
+        width: 100%;
+
+        @include tablet{
+            border-top-width: 2%;
+        }
+    }
+
+    &-links{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        
+        @include tablet{
+            padding-left: 15%;
+            padding-right: 15%;
+            justify-content: space-around;
+        }
+
+        &__item{
+            @include body-text;
+            padding: 0.25rem 1rem 0.25rem;
+
+            @include tablet{
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+
+            &:hover{
+                background-color: $color-light-black;
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+@use '../../styles/partials/global' as *;
+
+.slide {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  
+    &-button {
+      background: none;
+      border: none;
+      outline: none;
+      padding: 0;
+      width: 3rem;
+  
+      &__image {
+        width: 100%;
+      }
+    }
+  
+    &-slide {
+      width: 70vw;
+  
+      &-scroll {
+        display: flex;
+        overflow: hidden;
+        
+        @include tablet{
+          gap: 2%;
+          padding-left: 1%;
+          padding-right: 1%;
+        }
+
+        @include desktop{
+          gap: 2%;
+          padding-left: 1%;
+          padding-right: 1%;
+        }
+      }
+    }
+  }

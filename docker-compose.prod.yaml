@@ -1,0 +1,12 @@
+services:
+  web:
+    image: stephenman88/proxy-rabbit-web-prod:${IMAGE_TAG:-latest}
+    container_name: proxy-rabbit-web-prod
+    ports:
+      - "3000:80"
+    restart: always
+      
+  api:
+    image: stephenman88/proxy-rabbit-api-prod:${IMAGE_TAG:-latest}
+    container_name: proxy-rabbit-api-prod
+    restart: always

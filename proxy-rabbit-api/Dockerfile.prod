@@ -1,0 +1,21 @@
+#install dependencies
+FROM node:18-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+#runtime image
+FROM node:18-alpine
+WORKDIR /app
+
+#copy needed files
+COPY --from=build /app/node_modules ./node_modules
+COPY . .
+
+ENV NODE_ENV=production
+
+#run as non-root user
+USER node
+
+EXPOSE 8080
+CMD ["node", "index.js"]

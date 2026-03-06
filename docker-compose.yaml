@@ -1,0 +1,49 @@
+services:
+  web:
+    depends_on:
+    - api
+    image: proxy-rabbit-web-dev:1.0.0
+    container_name: proxy-rabbit
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_BASE_URL: ${THIS_URL}
+      REACT_APP_GOOGLE_OAUTH_LINK: ${OAUTH_URL}
+      
+  api:
+    depends_on:
+    - db
+    image: proxy-rabbit-api-dev:1.0.0
+    container_name: proxy-rabbit-api
+    ports:
+      - "8080:8080"
+
+    environment:
+      PORT: "8080"
+      CORS_ORIGIN: ${CORS_ORIGIN}
+      THIS_URL: ${THIS_URL}
+      SESSION_SECRET: ${SESSION_SECRET}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      GOOGLE_CALLBACK_URL: ${GOOGLE_CALLBACK_URL}
+      PROXY_RABBIT_FRONTEND: ${PROXY_RABBIT_FRONTEND}
+      DB_URL: db
+      DB_PORT: 5432
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+  
+  db:
+    image: postgres:17
+    container_name: proxy-rabbit-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

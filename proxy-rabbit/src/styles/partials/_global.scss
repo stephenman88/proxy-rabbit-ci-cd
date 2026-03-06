@@ -1,0 +1,140 @@
+@use './fonts' as *;
+
+$color-light-gray: #e8e6e6;
+$color-dark-gray: #cccccc;
+$color-black: #000000;
+$color-light-black: #616161;
+$color-light-black-opaque: #616161aa;
+$color-white: #FFFFFF;
+$color-light-red: #de655b;
+$color-bold-red: #ff1300;
+
+@mixin tablet{
+    @media (min-width: 768px) {
+        @content
+    }
+};
+
+@mixin desktop{
+    @media (min-width: 1280px){
+        @content
+    }
+};
+
+@mixin page-boundaries{
+    padding: 0 1rem 0;
+    
+    @include tablet{
+        padding: 0 2rem 0;
+    }
+
+    @include desktop{
+        padding: 0 6% 0;
+    }
+};
+
+@mixin page-header-text{
+    font-size: 1.5rem;
+
+    @include tablet{
+        font-size: 2rem;
+    }
+}
+
+@mixin subheader-text{
+    font-size: 1rem;
+
+    @include tablet{
+        font-size: 1.5rem;
+    }
+}
+
+@mixin body-text{
+    font-size: 0.7rem;
+
+    @include tablet{
+        font-size: 1rem;
+    }
+}
+
+@mixin tiny-text{
+    font-size: 0.5rem;
+
+    @include tablet{
+        font-size: 0.5rem;
+    }
+}
+
+@mixin line($side){
+    position: absolute;
+        #{$side}: 0.1rem;
+        border-top: 0.075rem solid $color-white;
+        width: 100%;
+
+        @include tablet{
+            border-top-width: 2%;
+        }
+}
+
+@mixin search-parent{
+    display: flex;
+            flex-direction: row;
+            border-radius: 0.3rem;
+            position: relative;
+}
+
+@mixin scroll-bar{
+    width: 0.25rem;
+    background-color: $color-light-gray;
+}
+
+@mixin scroll-bar-thumb{
+    background-color: $color-black
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Titillium Web';
+};
+
+input:active{
+    outline: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+@mixin input(){
+    flex-grow: 1;
+                border:none;
+                padding: 0.45rem 0.75rem 0.45rem;
+                border-radius: 0.3rem;
+                @include body-text;
+                width: 100%;
+}
+
+@mixin search-button(){
+    position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                border:none;
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+                background-color: $color-light-red;
+                color: $color-white;
+                border-radius: 0.3rem;
+                @include body-text;
+
+                &:active{
+                    background-color: $color-bold-red;
+                }
+}
+
+.react-slideshow-container > .nav{
+    top: 45%;
+}

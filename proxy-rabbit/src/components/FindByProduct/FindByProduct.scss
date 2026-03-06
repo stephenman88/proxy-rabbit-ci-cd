@@ -1,0 +1,79 @@
+@use '../../styles/partials/global' as *;
+
+
+.findbyproduct{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    padding-top: 1rem;
+
+    &-find, &-popular, &-discovery{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        &-head{
+            display:flex;
+            flex-direction: row;
+            background-color: $color-black;
+            color: white;
+            position:relative;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+
+            &__line{
+                &--top{
+                    @include line(top);
+                }
+
+                &--bottom{
+                    @include line(bottom);
+                    bottom: 0.1rem;
+                }
+            }
+
+            &__title{
+                @include subheader-text;
+            }
+
+            &-search{
+                @include search-parent;
+                flex-grow:1;
+
+                @include tablet{
+                    flex-grow: 0;
+                    width: 40%;
+                }
+
+                &__input{
+                    @include input;
+                }
+
+                &__button{
+                    @include search-button;
+                }
+            }
+
+            &-content{
+                @include page-boundaries;
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+            }
+        }
+
+        &-body{
+            @include page-boundaries;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            width: 100%;
+
+            @include tablet{
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+        }
+    }
+}
