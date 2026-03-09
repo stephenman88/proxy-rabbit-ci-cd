@@ -4,20 +4,6 @@ on: [push]
 jobs:
   Test-Run:
     runs-on: ubuntu-latest
-    services:
-      db:
-        image: postgres:17
-        env:
-          POSTGRES_DB: testdb
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-          ports:
-            "5432:5432"
-          options: >-
-            --health-cmd pg_isready
-            --health-interval 10s
-            --health-timeout 5s
-            --health-retries 5
     steps:
     - name: Checkout code
       uses: actions/checkout@v5
@@ -26,7 +12,7 @@ jobs:
         echo "THIS_URL=http://api:8080" >> .env
         echo "CORS_ORIGIN=http://web:3000" >> .env
         echo "OAUTH_URL=http://api:8080" >> .env
-        echo "PROXY_RABBIT_FRONTEND=htpp://web:3000" >> .env
+        echo "PROXY_RABBIT_FRONTEND=http://web:3000" >> .env
         echo "DB_NAME=testdb" >> .env
         echo "DB_USER=user" >> .env
         echo "DB_PASSWORD=password" >> .env
@@ -35,16 +21,16 @@ jobs:
         echo "GOOGLE_CLIENT_SECRET=notreallymygoogleclientsecret" >> .env
         echo "GOOGLE_CALLBACK_URL=http://api:8080/api/login/google/callback" >> .env
     - name: Build Docker Compose stack
-      run: docker compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d
+      run: docker compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build
     - name: Check running containers
       run: docker ps
     - name: wait for database to be healthy
       run: sleep 10
     - run: echo "beginning run tests"
     - name: Run web test
-      run: docker compose exec web npm test
+      run: docker compose run -T web npm test
     - name: Run api test
-      run: docker compose exec api node index.js
+      run: docker compose run -T api npm test
     - name: Clean up containers
       if: always()
       run: docker compose down
