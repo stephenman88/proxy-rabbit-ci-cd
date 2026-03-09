@@ -65,7 +65,7 @@ function Register(){
             const countryId = countries.find(country => country.name === e.target.country.value).id
 
             try{
-                await axios.post(`${baseUrl}/api/register`,{
+                const response = await axios.post(`${baseUrl}/api/register`,{
                     email: e.target.email.value,
                     password: e.target.password.value,
                     first_name: e.target.firstName.value,
