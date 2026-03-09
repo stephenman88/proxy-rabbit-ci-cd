@@ -35,7 +35,7 @@ jobs:
         echo "GOOGLE_CLIENT_SECRET=notreallymygoogleclientsecret" >> .env
         echo "GOOGLE_CALLBACK_URL=http://api:8080/api/login/google/callback" >> .env
     - name: Build and run Docker Compose stack
-      run: docker compose up -d --build
+      run: docker compose -f docker-compose.yaml -f docker-compose.dev.yaml
     - name: Check running containers
       run: docker ps
     - name: wait for database to be healthy
