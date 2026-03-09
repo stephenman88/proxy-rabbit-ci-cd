@@ -12,7 +12,7 @@ jobs:
           POSTGRES_USER: user
           POSTGRES_PASSWORD: password
           ports:
-            - "5432:5432"
+            "5432:5432"
           options: >-
             --health-cmd pg_isready
             --health-interval 10s
@@ -20,7 +20,7 @@ jobs:
             --health-retries 5
     steps:
     - name: Checkout code
-      uses: [actions/checkout@v5]
+      uses: actions/checkout@v5
     - name: Build and run Docker Compose stack
       run: docker compose up -d --build
     - name: Check running containers
