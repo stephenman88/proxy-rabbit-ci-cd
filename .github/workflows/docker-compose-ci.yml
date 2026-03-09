@@ -27,7 +27,7 @@ jobs:
       run: docker ps
     - name: wait for database to be healthy
       run: sleep 10
-    - run: echo "beginning run tests"
+    - run: echo "beginning run tests "
     - name: Run web test
       run: docker compose exec web npm test
     - name: Run api test
