@@ -27,8 +27,9 @@ jobs:
       run: docker ps
     - name: wait for database to be healthy
       run: sleep 10
-    - name: Run application test
+    - name: Run web test
       run: docker compose exec web npm test
+    - name: Run api test
       run: docker compose exec api node index.js
     - name: Clean up containers
       if: always()
