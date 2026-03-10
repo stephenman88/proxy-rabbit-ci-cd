@@ -23,17 +23,9 @@ jobs:
         with:
           node-version: '24.x'
 
-      - name: npm install, build, and test
+      - name: docker compose build
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
-        with:
-          name: node-app
-          path: .
+          docker compose -f docker-compose.yaml -f docker-compose.prod.yaml build
 
   deploy:
     runs-on: ubuntu-latest
@@ -62,4 +54,5 @@ jobs:
           app-name: 'proxy-rabbit'
           slot-name: 'Production'
           package: .
+
           
