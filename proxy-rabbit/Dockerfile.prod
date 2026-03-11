@@ -12,7 +12,7 @@ FROM node:20-alpine
 WORKDIR /app
 RUN apk add --no-cache gettext
 RUN npm install -g serve
-COPY --from=build /app/build ./build/
-COPY public/env.template.js ./build/env.template.js
-CMD sh -c "envsubst < /app/build/env.template.js > /app/build/env.js && serve -s build -l ${PORT}"
+COPY --from=build /app/build ./dist/
+COPY public/env.template.js ./dist/env.template.js
+CMD sh -c "envsubst < /app/dist/env.template.js > /app/dist/env.js && serve -s dist -l ${PORT}"
 EXPOSE 8080
