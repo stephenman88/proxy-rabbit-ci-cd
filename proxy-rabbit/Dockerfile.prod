@@ -13,6 +13,6 @@ WORKDIR /app
 RUN apk add --no-cache gettext
 RUN npm install -g serve
 COPY --from=build /app/build ./build/
-COPY /app/build/public/env.template.js ./build/public/env.template.js
+COPY /public/env.template.js ./build/public/env.template.js
 CMD sh -c "envsubst < /build/public/env.template.js > /build/public/env.js && serve -s build -l ${PORT}"
 EXPOSE 8080
