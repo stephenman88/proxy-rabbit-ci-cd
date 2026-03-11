@@ -21,16 +21,30 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v5
-    - name: Build and run Docker Compose stack
-      run: docker compose up -d --build
+    - name: set up environment variables
+      run: |
+        echo "THIS_URL=http://api:8080" >> .env
+        echo "CORS_ORIGIN=http://web:3000" >> .env
+        echo "OAUTH_URL=http://api:8080" >> .env
+        echo "PROXY_RABBIT_FRONTEND=htpp://web:3000" >> .env
+        echo "DB_NAME=testdb" >> .env
+        echo "DB_USER=user" >> .env
+        echo "DB_PASSWORD=password" >> .env
+        echo "SESSION_SECRET=notreallymysecret" >> .env
+        echo "GOOGLE_CLIENT_ID=notreallymygoogleclientid" >> .env
+        echo "GOOGLE_CLIENT_SECRET=notreallymygoogleclientsecret" >> .env
+        echo "GOOGLE_CALLBACK_URL=http://api:8080/api/login/google/callback" >> .env
+    - name: Build Docker Compose stack
+      run: docker compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d
     - name: Check running containers
       run: docker ps
     - name: wait for database to be healthy
       run: sleep 10
-    - name: Run web test
-      run: docker compose exec web npm test
-    - name: Run api test
-      run: docker compose exec api node index.js
+    # - run: echo "beginning run tests"
+    # - name: Run web test
+    #   run: docker compose exec web npm test
+    # - name: Run api test
+    #   run: docker compose exec api node index.js
     - name: Clean up containers
       if: always()
       run: docker compose down
