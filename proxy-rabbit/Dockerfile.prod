@@ -14,5 +14,5 @@ RUN apk add --no-cache gettext
 RUN npm install -g serve
 COPY --from=build /app/build ./dist/
 COPY public/env.template.js ./dist/env.template.js
-CMD sh -c "envsubst < /dist/env.template.js > /dist/env.js && serve -s dist -l ${PORT}"
+CMD sh -c "envsubst < /public/env.template.js > /public/env.js && serve -s dist -l ${PORT}"
 EXPOSE 8080
