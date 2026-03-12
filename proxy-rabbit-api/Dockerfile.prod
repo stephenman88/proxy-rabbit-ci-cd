@@ -8,6 +8,8 @@ RUN npm ci --omit=dev
 FROM node:18-alpine
 WORKDIR /app
 
+RUN npm install knex -g
+
 #copy needed files
 COPY --from=build /app/node_modules ./node_modules
 COPY . .
@@ -18,4 +20,4 @@ ENV NODE_ENV=production
 USER node
 
 EXPOSE 8080
-CMD ["npm", "install", "knex", "-g", "&&", "knex", "migrate:latest", "&&", "knex", "seed:run", "&&", "node", "index.js"]
+CMD sh -c "knex migrate:latest && knex seed:run && node index.js"
