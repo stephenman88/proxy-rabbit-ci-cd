@@ -12,7 +12,7 @@ const knex = require('knex')(require('./knexfile'))
 const session = require("express-session");
 const jwt = require('jsonwebtoken')
 const KnexSessionStore = require("connect-session-knex")(session)
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 const http = require('http');
 const server = http.createServer(app);
 const {Server} = require('socket.io');
@@ -93,7 +93,7 @@ app.use('/api/message', function(req, res, next){
 },messageRouter);
 
 
-
-server.listen(PORT, ()=>{
+//0.0.0.0 needed for azure container
+server.listen(PORT, '0.0.0.0', ()=>{
     console.log(`Listening to port ${PORT}`)
 })
