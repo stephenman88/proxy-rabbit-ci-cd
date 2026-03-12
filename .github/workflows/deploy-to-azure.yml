@@ -55,4 +55,4 @@ jobs:
         with:
           app-name: ${{env.AZURE_WEBAPP_API_NAME}}
           publish-profile: ${{secrets.AZURE_WEBAPP_API_PUBLISH_PROFILE}}
-          images: 'ghcr.io/${{env.REPO}}/web:${{github.sha}}'
+          images: 'ghcr.io/${{env.REPO}}/api:${{github.sha}}'
