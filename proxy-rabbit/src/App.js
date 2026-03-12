@@ -34,7 +34,9 @@ function App() {
         if(localStorage.getItem("userProfile")) setUserProfile(JSON.parse(localStorage.getItem("userProfile")))
         if(localStorage.getItem("token")) jsCookie.set("token", localStorage.getItem("token"))
         const response = await axios.get(`${apiUrl}/api/countries`)
-        setCountries(response.data);
+        if(Array.isArray(response.data)){
+          setCountries(response.data);
+        }
       }catch(error){
         console.log(error)
       }
